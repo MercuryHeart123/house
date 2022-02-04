@@ -1,0 +1,85 @@
+.container {
+  position: relative;
+  transition: all 0.8s;
+  margin-top: 28px;
+  background-color: #f5f5f6;
+  width: 32%;
+  height: 26vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.container .cover {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.content {
+  margin: 5px 0 0 5px;
+}
+
+.content p {
+  color: grey;
+}
+
+.tag {
+  position: absolute;
+  display: flex;
+  background-color: lightcoral;
+  align-items: center;
+  justify-content: center;
+  width: 42%;
+  height: 16%;
+  top: 20px;
+}
+
+.tag span {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.cover:hover,
+.cover:focus {
+  transform: scale(1.038);
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    height: 50vw;
+    width: 49%;
+  }
+
+  .container .cover {
+    height: 90%;
+  }
+
+  .tag {
+    width: 44%;
+  }
+
+  .tag span {
+    font-size: 80%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    width: 100%;
+    height: 300px;
+  }
+  .tag {
+    width: 50%;
+    height: 18%;
+  }
+
+  .tag span {
+    font-size: 13px;
+  }
+}

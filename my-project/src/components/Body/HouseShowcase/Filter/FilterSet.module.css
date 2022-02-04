@@ -1,0 +1,22 @@
+.container {
+  column-gap: 10px;
+  max-width: 100vw;
+  transition: all 0.8s;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    display: flex;
+    max-width: 100vw;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 2s;
+    gap: 15px;
+  }
+}

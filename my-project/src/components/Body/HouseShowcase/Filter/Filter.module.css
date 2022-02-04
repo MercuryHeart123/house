@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+.dropdown {
+  position: relative;
+  height: calc(50px + 1vh);
+  width: 100%;
+  user-select: none;
+}
+.dropdown .dropdownBtn {
+  padding: 15px 20px;
+  background: #fff;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.dropdown .dropdownContent {
+  background: #fff;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 110%;
+  width: 100%;
+  padding: 10px;
+  overflow-y: scroll;
+  transition: 0.4s;
+  z-index: 555;
+  max-height: 20vh;
+}
+
+.dropdown .dropdownContentDisappaer {
+  transition: all 0.35s;
+  visibility: hidden;
+}
+
+.dropdownContentDisappaer .dropdownItem {
+  visibility: hidden;
+  display: none;
+}
+
+.dropdown .dropdownContent .dropdownItem {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+}
+.dropdown .dropdownContent .dropdownItem:hover {
+  background: #fff0eafa;
+}
+
+.formControl409 + .formControl409 {
+  margin-top: 0.95em;
+}
+
+.formControl409 {
+  --form-control-color: brown;
+  font-weight: 500;
+  line-height: 1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+.formControl409 input {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: black;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  display: grid;
+  place-content: center;
+}
+
+.formControl409 input::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 110ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+.formControl409 input:checked::before {
+  transform: scale(1);
+}
+
+@media only screen and (max-width: 920px) {
+  .dropdown {
+    width: 90vw;
+  }
+}

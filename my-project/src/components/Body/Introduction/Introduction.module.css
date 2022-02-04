@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+  padding-top: 9.875rem;
+  padding-bottom: 7.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 40px;
+}
+
+.container .imageBox {
+  width: 700px;
+  height: 435px;
+  max-height: 525px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.4s ease-in-out;
+}
+
+.container .textBox {
+  width: 25%;
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container .imageBox {
+    width: 90%;
+    height: 80vw;
+    background-image: url("https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500") !important;
+  }
+
+  .container .textBox {
+    margin-top: 15px;
+    width: 80%;
+  }
+}
