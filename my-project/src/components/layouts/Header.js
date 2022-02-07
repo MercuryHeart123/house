@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-
+import { connect } from 'react-redux'
+import axios from 'axios'
+import { NavLink as Link } from 'react-router-dom';
 import "./Header.css";
 
-const Header = () => {
+const Header = (props) => {
   const [isNavScroll, setNavScroll] = useState(false);
   const [isNavActive, setIsNavActive] = useState("nav");
 
+  const logout = () => {
+    axios.defaults.withCredentials = true;
+    axios.post(`${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/logout`).then(() => {
+            props.dispatch({
+                type: 'logout',
+                data: false,
+            })
+        })
+  }
+  
   const navScrollingAdjustment = () => {
     if (window.scrollY > 0) {
       setNavScroll(true);
@@ -79,10 +91,27 @@ const Header = () => {
           <a href="" target="_blank">
             ติดต่อร่วมงาน
           </a>
+          {props.username &&
+            <Link to='/edit'  >
+              edit
+            </Link>
+          }
+          {props.username &&
+              <Link to='/' onClick={logout}>
+                logout
+              </Link>
+          }
         </div>
       </div>
     </div>
   );
 };
 
-export default Header;
+
+const mapStateToProps = (state) => {
+  return {
+    username : state.username
+  }
+}
+
+export default connect(mapStateToProps)(Header)
