@@ -3,7 +3,7 @@
   padding-top: 6rem;
 }
 
-.container > .link-content {
+.container > .linkContent {
   padding-top: 3.5rem;
   padding-bottom: 1rem;
   display: flex;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.container > .link-content > a {
+.container > .linkContent > a {
   color: white;
   text-decoration: none;
   margin: 10px;
@@ -21,11 +21,11 @@
   font-weight: 700;
 }
 
-.container > .link-content > a:focus {
+.container > .linkContent > a:focus {
   text-decoration: underline;
 }
 
-.container > .socialmedia-content {
+.container > .socialmediaContent {
   padding-bottom: 3rem;
   display: flex;
   flex-direction: row;
@@ -33,7 +33,7 @@
   align-items: center;
 }
 
-.container > .socialmedia-content > a {
+.container > .socialmediaContent > a {
   color: lightgray;
   text-decoration: none;
   margin: 10px;
