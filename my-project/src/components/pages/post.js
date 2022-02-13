@@ -29,6 +29,8 @@ class Post extends Component{
         let type = event.target.type.value
         let description = event.target.description.value
         let status = event.target.status.value
+        let province = event.target.province.value
+        let address = event.target.address.value
         let uid = this.props.post.uuid
         let ip = process.env.REACT_APP_IP || "localhost"
         let port = process.env.REACT_APP_PORT || 8080
@@ -39,6 +41,8 @@ class Post extends Component{
             type,
             description,
             status,
+            province,
+            address,
             image : this.state.image,
             uid,
         };
@@ -202,6 +206,14 @@ class Post extends Component{
                         <div class="mb-3">
                           <label for="exampleInputPassword1" class="form-label">Type</label>
                           <input type="text" class="form-control" name='type' defaultValue={this.props.post.type} id="exampleInputPassword1"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Province</label>
+                          <input type="text" class="form-control" name='province' defaultValue={this.props.post.province} id="exampleInputPassword1"/>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Address</label>
+                          <input type="text" class="form-control" name='address' defaultValue={this.props.post.address} id="exampleInputPassword1"/>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Description</label>

@@ -87,7 +87,7 @@ app.post('/login', async(req, res) => {
 
 app.post('/post', checkAuth, async(req, res) => {
 
-  const { name, price, type, description, status, image, uid } = req.body;
+  const { name, price, type, description, status, image, province, address, uid } = req.body;
   
   // console.log(name, price, uid);
   const client = new MongoClient(uri);
@@ -109,6 +109,8 @@ app.post('/post', checkAuth, async(req, res) => {
     let query = { name,
                   price,
                   type,
+                  province,
+                  address,
                   description,
                   status,
                   path,
@@ -141,6 +143,8 @@ app.post('/post', checkAuth, async(req, res) => {
       name,
       price,
       type,
+      province,
+      address,
       description,
       status,
       path
