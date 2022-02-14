@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PrivateRoute } from "./components/pages/private/private";
 import {
   BrowserRouter as Router,
@@ -17,6 +17,7 @@ import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 
 function App(props) {
+  const [img ,setImg] = useState([])
   const imageRunner = async (path) => {
     let ip = process.env.REACT_APP_IP || "localhost";
     let port = process.env.REACT_APP_PORT || 8080;
@@ -24,30 +25,26 @@ function App(props) {
     const formPath = {
       path,
     };
-    const response = await axios.post(url, formPath);
-    console.log(response);
-    return `data:image/png;base64,${response.data}`;
+    const response = await new Promise((resolve, reject) => {
+      axios.post(url, formPath).then(
+        res => {
+          resolve(res.data);
+        }
+      );
+    })
+    const base64 = `data:image/png;base64,${response}`
+    return base64;
   };
-  const createImg = () => {
-    if (props.list) {
-      const imageList = [];
-      for (let i = 0; i < props.list.length; i++) {
-        console.log(props.list[i].path);
-        const path = props.list[i].path[0];
-        const base64 = imageRunner(path);
-        console.log(base64);
-        imageList.push(<img key={i} src={base64} />);
-      }
-      return imageList;
-    }
-  };
+  const CreateImg = img.map(( item, index) => {
+    return <img key={index} src={item}/>
+  })
 
-  useEffect(() => {
+  useEffect(async() => {
     axios.defaults.withCredentials = true;
     axios
       .get(`${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`)
       .then((response) => {
-        console.log(response);
+
         if (response.data.loggedIn == true) {
           props.dispatch({
             type: "login",
@@ -58,20 +55,24 @@ function App(props) {
 
     axios
       .get(`${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/listpost`)
-      .then((response) => {
-        console.log(response);
-        props.dispatch({
-          type: "update",
-          data: response.data,
-        });
+      .then( async(response) => {
+        let list = response.data
+        const imageList = []
+        for (let i = 0; i < list.length; i++) {
+          const path = list[i].path[0]
+          const base64 = await imageRunner(path);
+          imageList.push(base64)
+        }
+        setImg(imageList)
       });
+
   }, []);
 
   return (
     <Router>
       <div className="App">
         <Header />
-        {props.list && createImg()}
+        {CreateImg}
 
         <div style={{ padding: "5vh" }}></div>
         <Routes>
