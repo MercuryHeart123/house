@@ -23,7 +23,6 @@ function App(props) {
     axios
       .get(`${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/login`)
       .then((response) => {
-
         if (response.data.loggedIn == true) {
           props.dispatch({
             type: "login",
@@ -41,7 +40,6 @@ function App(props) {
           data: list,
         });
       });
-
   }, []);
   const createEachHouseRoute = () => {
     if (props.list) {

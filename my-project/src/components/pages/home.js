@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSection from "../Hero/HeroSection.js";
 import Body from "../Body/Body";
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
       <HeroSection />
@@ -10,4 +10,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default (Home);
