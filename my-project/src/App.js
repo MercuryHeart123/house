@@ -44,7 +44,8 @@ function App(props) {
   const createEachHouseRoute = () => {
     if (props.list) {
       return props.list.map((item, index) => {
-        return <Route path={item.name} key={index} element={<EachHouse data={item} />} />
+        let urlEncoded = encodeURI(item.name);
+        return <Route path={urlEncoded} key={index} element={<EachHouse data={item} />} />
       })
     }
   }
