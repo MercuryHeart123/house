@@ -17,6 +17,7 @@ const EachHouse = (props) => {
   }, [])
   return (
     <div>
+      {data.name}
       <Slider />
       <DetailBox />
       {console.log(arrImg)}

@@ -13,7 +13,7 @@ const House = (props) => {
     setFeatureImg(tmpImg)
   }, [])
   return (
-    <Link className={classes.container} to={data.name}>
+    <Link className={classes.container} to={`/${data.name}`}>
       <div
         className={classes.cover}
         style={{
