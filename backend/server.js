@@ -214,8 +214,14 @@ app.get("/listpost", async (req, res) => {
 
 app.post("/getbase64", async (req, res) => {
   const { path } = req.body;
-  let file = fs.readFileSync(path);
-  res.send(file.toString("base64"));
+  if( !path ){
+    res.send();
+  }
+  else{
+    let file = fs.readFileSync(path);
+    res.send(file.toString("base64"));
+  }
+  
 });
 
 app.listen(port, () => {
