@@ -1,16 +1,23 @@
 import classes from "./House.module.css";
 
 import EachHouse from "./EachHouse/EachHouse";
-
+import { useEffect, useState } from "react";
+import { NavLink as Link } from 'react-router-dom';
+import imageRunner from "../../../imageRunner";
 const House = (props) => {
-  const handleClick = (house) => {};
-
+  const handleClick = (house) => { };
+  const [featureImg, setFeatureImg] = useState()
+  var { data } = props
+  useEffect(async () => {
+    var tmpImg = await imageRunner(data.path[0])
+    setFeatureImg(tmpImg)
+  }, [])
   return (
-    <div className={classes.container} onClick={props.onClick}>
+    <Link className={classes.container} to={data.name}>
       <div
         className={classes.cover}
         style={{
-          backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd01bKObdtTNm_h-DCHMlLeZVqSThHU2CK3IX3NFVBoiYfOpK0y4GT4x5Yvnb5bMMx428&usqp=CAU)`,
+          backgroundImage: `url(${featureImg ? featureImg : null})`,
         }}
       >
         <div className={classes.tag}>
@@ -21,7 +28,7 @@ const House = (props) => {
         <h3>บ้านเดี่ยว นครปฐม</h3>
         <p>ราคา 4.9 ล้านบาท</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

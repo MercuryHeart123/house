@@ -15,30 +15,9 @@ import Post from "./components/pages/post";
 import Home from "./components/pages/home";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
+import EachHouse from "./components/Body/HouseShowcase/House/EachHouse/EachHouse";
 
 function App(props) {
-  const [img, setImg] = useState([])
-  const imageRunner = async (path) => {
-    let ip = process.env.REACT_APP_IP || "localhost";
-    let port = process.env.REACT_APP_PORT || 8080;
-    const url = `${ip}:${port}/getbase64`;
-    const formPath = {
-      path,
-    };
-    const response = await new Promise((resolve, reject) => {
-      axios.post(url, formPath).then(
-        res => {
-          resolve(res.data);
-        }
-      );
-    })
-    const base64 = `data:image/png;base64,${response}`
-    return base64;
-  };
-  const CreateImg = img.map((item, index) => {
-    return <img key={index} src={item} />
-  })
-
   useEffect(async () => {
     axios.defaults.withCredentials = true;
     axios
@@ -57,13 +36,6 @@ function App(props) {
       .get(`${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/listpost`)
       .then(async (response) => {
         let list = response.data
-        const imageList = []
-        for (let i = 0; i < list.length; i++) {
-          const path = list[i].path[0]
-          const base64 = await imageRunner(path);
-          imageList.push(base64)
-        }
-        setImg(imageList)
         props.dispatch({
           type: "update",
           data: list,
@@ -71,12 +43,17 @@ function App(props) {
       });
 
   }, []);
-
+  const createEachHouseRoute = () => {
+    if (props.list) {
+      return props.list.map((item, index) => {
+        return <Route path={item.name} key={index} element={<EachHouse data={item} />} />
+      })
+    }
+  }
   return (
     <Router>
       <div className="App">
         <Header />
-        {CreateImg}
         <div style={{ padding: "5vh" }}></div>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -93,6 +70,7 @@ function App(props) {
           >
             <Route path="/post" element={<Post />} />
           </Route>
+          {createEachHouseRoute()}
         </Routes>
 
         <Footer />
